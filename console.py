@@ -123,14 +123,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[args[0]]()
+        storage.save()
+        obj = storage.all()
         if args[1]:
             idnum = new_instance.id
-            newobj = args[0].idnum
             for i in range(1, len(args)):
                 param = args[i].split("=")
                 key = param[0]
                 value = param[1]
-                setattr(newobj, key, value)
+                update_args = args[0] + " " + idnum + " " + param[0] + " "\
+                    + param[1]
+                self.do_update(update_args)
         storage.save()
         print(new_instance.id)
         storage.save()

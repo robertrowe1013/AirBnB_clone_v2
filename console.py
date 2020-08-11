@@ -129,8 +129,8 @@ class HBNBCommand(cmd.Cmd):
             idnum = new_instance.id
             for i in range(1, len(args)):
                 key, value = args[i].split("=")
-                update_args = args[0] + " " + idnum + " " + param[0] + " "\
-                    + param[1]
+                update_args = args[0] + " " + idnum + " " + key + " "\
+                    + value
                 self.do_update(update_args)
         storage.save()
         print(new_instance.id)

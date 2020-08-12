@@ -135,8 +135,7 @@ class HBNBCommand(cmd.Cmd):
                     if '"' in value:
                         dict_key = args[0] + '.' + idnum
                         new_dict = storage.all()[dict_key]
-                        value = value.replace('"', '\\"')
-                        print(value)
+                        value = value.strip('"')
                         new_dict.__dict__.update({key: value})
                         continue
                     value = '"' + value + '"'

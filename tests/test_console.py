@@ -1,9 +1,12 @@
 #!/usr/bin/python3
+""" test console """
 import unittest
 from io import StringIO
 from unittest.mock import patch
 
-class TestConsole(unittest.TestCase)
+
+class TestConsole(unittest.TestCase):
+    """ test console """
     def test_console(self):
         """ test console """
         with patch('sys.stdout', new=StringIO()) as output:

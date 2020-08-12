@@ -129,6 +129,17 @@ class HBNBCommand(cmd.Cmd):
             idnum = new_instance.id
             for i in range(1, len(args)):
                 key, value = args[i].split("=")
+                if value[0] == '"':
+                    value = value[1:-1]
+                    value = value.replace('_', ' ')
+                    if '"' in value:
+                        dict_key = args[0] + '.' + idnum
+                        new_dict = storage.all()[dict_key]
+                        value = value.replace('"', '\\"')
+                        print(value)
+                        new_dict.__dict__.update({key: value})
+                        continue
+                    value = '"' + value + '"'
                 update_args = args[0] + " " + idnum + " " + key + " "\
                     + value
                 self.do_update(update_args)

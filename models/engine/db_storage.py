@@ -24,7 +24,8 @@ class DBStorage():
         mspasswd = os.getenv('HBNB_MYSQL_PWD')
         mshost = os.getenv('HBNB_MYSQL_HOST')
         msdb = os.getenv('HBNB_MYSQL_DB')
-        url = 'mysql+mysqldb://{}:{}@{}/{}'.format(msuser, mspasswd, mshost, msdb)
+        url = 'mysql+mysqldb://{}:{}@{}/{}'.format(msuser, mspasswd, mshost,
+                                                   msdb)
         env = os.getenv('HBNB_ENV')
         self.__engine = create_engine(url, pool_pre_ping=True)
         if env == 'test':
@@ -62,4 +63,3 @@ class DBStorage():
         sess = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess)
         self.__session = Session()
-        

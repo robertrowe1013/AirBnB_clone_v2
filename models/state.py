@@ -2,8 +2,8 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
-from models import storage
-from models.city import City
+from sqlalchemy.orm import relationship
+from os import environ
 
 
 class State(BaseModel, Base):
@@ -17,6 +17,8 @@ class State(BaseModel, Base):
         @property
         def cities(self):
             """ Returns a list of cities related to self """
+            from models import storage
+            from models.city import City
             citylist = storage.all(City)
             related = []
 

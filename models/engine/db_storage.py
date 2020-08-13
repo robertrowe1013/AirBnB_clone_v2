@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ db storage """
-import sqlalchemy
+from sqlalchemy import create_engine
 from models.base_model import Base, BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -34,7 +34,8 @@ class DBStorage():
         """ query all objects of cls """
         tmp = {}
         if cls is None:
-            allobjs = self.__session.query(User, State, City, Amenity, Place, Review).all()
+            allobjs = self.__session.query(State).all()
+            allobjs += self.__session.query(City).all()
         else:
             allobjs = self.__session.query(cls).all()
         for obj in allobjs:
@@ -42,7 +43,7 @@ class DBStorage():
             tmp.update({key: obj})
         return tmp
 
-    def new(sefl, obj):
+    def new(self, obj):
         """ add obj to db """
         self.__session.add(obj)
 
@@ -58,7 +59,7 @@ class DBStorage():
     def reload(self):
         """ reload db """
         Base.metadata.create_all(self.__engine)
-        sess = sessionmaker(bind.self__engine, expire_on_commit=False)
+        sess = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess)
         self.__session = Session()
         

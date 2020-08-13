@@ -122,26 +122,20 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args[0]]()
-        storage.save()
-        obj = storage.all()
-        if args[1]:
-            idnum = new_instance.id
+        if len(args) > 1:
+            attr = {}
             for i in range(1, len(args)):
                 key, value = args[i].split("=")
                 if value[0] == '"':
-                    value = value[1:-1]
                     value = value.replace('_', ' ')
-                    if '"' in value:
-                        dict_key = args[0] + '.' + idnum
-                        new_dict = storage.all()[dict_key]
-                        value = value.strip('"')
-                        new_dict.__dict__.update({key: value})
-                        continue
-                    value = '"' + value + '"'
-                update_args = args[0] + " " + idnum + " " + key + " "\
-                    + value
-                self.do_update(update_args)
+                    value = value[1:-1]
+                elif '.' in value:
+                    value = float(value)
+                else:
+                    value = int(value)
+                attr.update({key: value})
+        new_instance = HBNBCommand.classes[args[0]](**attr)
+        new_instance.save()
         storage.save()
         print(new_instance.id)
         storage.save()
@@ -226,11 +220,10 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
+                print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)

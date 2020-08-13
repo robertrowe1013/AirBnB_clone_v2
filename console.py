@@ -122,8 +122,8 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+        attr = {}
         if len(args) > 1:
-            attr = {}
             for i in range(1, len(args)):
                 key, value = args[i].split("=")
                 if value[0] == '"':

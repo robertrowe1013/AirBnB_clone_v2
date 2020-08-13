@@ -56,7 +56,7 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """ delete object """
+        """Deletes an object from __objects"""
         if obj.to_dict()['__class__'] + '.' + obj.id in FileStorage.__objects:
             del FileStorage.__objects[obj.to_dict()['__class__'] + '.\
 ' + obj.id]

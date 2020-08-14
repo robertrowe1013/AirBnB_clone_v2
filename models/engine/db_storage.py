@@ -39,6 +39,8 @@ class DBStorage():
             allobjs += self.__session.query(City).all()
             allobjs += self.__session.query(User).all()
             allobjs += self.__session.query(Place).all()
+            allobjs += self.__session.query(Amenity).all()
+            allobjs += self.__session.query(Review).all()
         else:
             allobjs = self.__session.query(cls).all()
         for obj in allobjs:

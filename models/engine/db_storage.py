@@ -37,6 +37,8 @@ class DBStorage():
         if cls is None:
             allobjs = self.__session.query(State).all()
             allobjs += self.__session.query(City).all()
+            allobjs += self.__session.query(User).all()
+            allobjs += self.__session.query(Place).all()
         else:
             allobjs = self.__session.query(cls).all()
         for obj in allobjs:

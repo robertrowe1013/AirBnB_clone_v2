@@ -16,3 +16,4 @@ class User(BaseModel, Base):
 
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         places = relationship("Place", cascade="all, delete", backref="user")
+        reviews = relationship("Review", cascade="all, delete", backref="user")

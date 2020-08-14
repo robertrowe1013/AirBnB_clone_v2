@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
-from models.amenity import Amenity
-from models import storage
 from models.base_model import BaseModel, Base
 from sqlalchemy import Table, Column, String, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
@@ -53,6 +51,8 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             """ Represents all related amenities. """
+            from models.amenity import Amenity
+            from models import storage
             amens = storage.all(Amenity)
             related = []
             for key in amens.keys():
@@ -62,5 +62,6 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
+            from models.amenity import Amenity
             if isinstance(obj, Amenity):
                 amenity_ids.append(obj.id)

@@ -20,10 +20,11 @@ def do_pack():
 
 env.hosts = ['34.75.53.84', '3.89.225.162']
 
+
 def do_deploy(archive_path):
     """ decompress files after sending """
 
-    try:        
+    try:
         if not os.path.exists(archive_path):
             return False
         put(archive_path, "/tmp/")
@@ -32,7 +33,8 @@ def do_deploy(archive_path):
         run("sudo mkdir -p {}".format(arch_dest))
         run("sudo tar -xvzf {} {}".format(archive_path, arch_dest))
         run("sudo rm -R {}".format(archive_path))
-        run("sudo ln -sf /data/web_static/releases/{}/ /data/web_static/current".format(filename))
+        run("sudo ln -sf /data/web_static/releases/{}/ \
+            /data/web_static/current".format(filename))
         return True
     except:
         return False

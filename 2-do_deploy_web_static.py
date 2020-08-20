@@ -19,6 +19,6 @@ def do_deploy(archive_path):
         run("sudo rm -R {}".format(archive_path))
         run("sudo ln -sf /data/web_static/releases/{}/ \
             /data/web_static/current".format(filename))
-    return True
+        return True
     except:
         return False

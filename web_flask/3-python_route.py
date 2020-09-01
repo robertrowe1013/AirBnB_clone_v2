@@ -27,10 +27,5 @@ def Pythontext(text='is_cool'):
     text = text.replace('_', ' ')
     return "Python {}".format(text)
 
-@app.route('/number/<int:n>')
-def Nnumber(n):
-    """ numbers """
-    return '%d' % escape(n)
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)

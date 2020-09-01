@@ -30,7 +30,7 @@ def Pythontext(text='is_cool'):
 @app.route('/number/<int:n>')
 def Nnumber(n):
     """ numbers """
-    return '%d' % escape(n)
+    return "{} is a number".format(n)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)

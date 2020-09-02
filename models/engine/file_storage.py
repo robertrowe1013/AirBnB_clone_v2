@@ -62,3 +62,7 @@ class FileStorage:
         if obj.to_dict()['__class__'] + '.' + obj.id in FileStorage.__objects:
             del FileStorage.__objects[obj.to_dict()['__class__'] + '.\
 ' + obj.id]
+
+    def close(self):
+        """ reload method """
+        self.reload()

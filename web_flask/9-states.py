@@ -23,8 +23,8 @@ def statelist():
 def stateid(id):
     """ list state by id """
     states = storage.all(State)
-    stateid = 'State.' + id
-    return render_template('9-states.html', statelist=states, stateid=id)
+    id = 'State.' + id
+    return render_template('9-states.html', states=states, id=id)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
